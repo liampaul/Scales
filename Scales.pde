@@ -1,6 +1,5 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 
 //set vars for grid & scale dimensions
 final static int numPixels = 400;
@@ -16,15 +15,15 @@ int realSizeIncrement = realMaxSize / sizeIncrement;
 
 //create Arrays
 
-List<List<Integer>> emptyGrid = new ArrayList<>();
-List<List<Integer>> scales = new ArrayList<>();
+ArrayList<ArrayList<Integer>> emptyGrid = new ArrayList();
+ArrayList<ArrayList<Integer>> scales = new ArrayList();
 boolean[][] filledPixels = new boolean[numPixels][numPixels];
 
 void generateArrays(){
   //emptyGrid
   for(int i = 0; i < gridDivisions; i++){
     for(int j = 0; j < gridDivisions; j++){
-    List<Integer> gridPoint = new ArrayList<>();
+    ArrayList<Integer> gridPoint = new ArrayList();
     gridPoint.add(pointDistance * j);
     gridPoint.add(pointDistance * i);
     emptyGrid.add(gridPoint);
@@ -47,12 +46,12 @@ void setup(){
     int x = emptyGrid.get(currentPoint).get(0);
     int y = emptyGrid.get(currentPoint).get(1);
   
-    List<Integer> nearestCircle = null;
+    ArrayList<Integer> nearestCircle = null;
     double smallestDistance = numPixels;
     double currentDistance;
   
     for(int i = 0; i < scales.size(); i++) {
-        List<Integer> scale = scales.get(i);
+        ArrayList<Integer> scale = scales.get(i);
         currentDistance = Math.sqrt(Math.pow((x - scale.get(0)), 2.0)+ Math.pow((y - scale.get(1)), 2.0)) - scale.get(2);
         if( currentDistance < smallestDistance) {
           smallestDistance = currentDistance;
@@ -62,14 +61,14 @@ void setup(){
     
     if(nearestCircle != null && smallestDistance <= realMaxSize) {
       if (smallestDistance > 0) {
-        List<Integer> scale = new ArrayList<>();
+        ArrayList<Integer> scale = new ArrayList();
         scale.add(x);
         scale.add(y);
         scale.add((int) smallestDistance);
         scales.add(scale);        
       }
     } else {
-        List<Integer> scale = new ArrayList<>();
+        ArrayList<Integer> scale = new ArrayList();
         scale.add(x);
         scale.add(y);
         scale.add(realMaxSize);
@@ -85,7 +84,7 @@ void draw(){
   color c1 = color(110, 255, 255); // A purple-blue
   color c2 = color(218, 247, 69); // A yellowish-pink
   for(int i = 0; i < scales.size(); i++){
-    List<Integer> scale = scales.get(i);
+    ArrayList<Integer> scale = scales.get(i);
     float noiseVal = noise(scale.get(0)*.01, scale.get(1)*.01);
     color c = lerpColor(c1, c2, noiseVal);
     
