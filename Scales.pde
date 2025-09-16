@@ -8,7 +8,7 @@ final static int maxSize = 4;
 final static int sizeIncrement = 8;
 
 //set vars for actuall processing units
-int pointDistance = numPixels / gridDivisions; // TODO: rounding?
+int pointDistance = numPixels / gridDivisions;
 int realMaxSize = pointDistance * maxSize;
 int realSizeIncrement = realMaxSize / sizeIncrement;
 
@@ -39,7 +39,6 @@ void setup(){
  
   
   while(emptyGrid.size() > 0){
-    //println(emptyGrid.size());
     
     int currentPoint = (int) (Math.random()*emptyGrid.size()); 
   
@@ -88,8 +87,8 @@ void draw(){
     float noiseVal = noise(scale.get(0)*.01, scale.get(1)*.01);
     color c = lerpColor(c1, c2, noiseVal);
     
-    println(noise(scale.get(0), scale.get(1)));
     fill(c-160);
     ellipse(scale.get(0), scale.get(1), 2 * scale.get(2), 2 * scale.get(2));
   }  
 }
+
